@@ -4,6 +4,12 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
+//requires are always at the top
+require('dotenv').config();
+
+//connect to db
+require('./config/database')
+
 const app = express();
 
 app.use(logger('dev'));
@@ -13,7 +19,7 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //put API routes here
-
+app.use('/api/users', require('./routes/api/users'));
 
 //catch all route
 app.get('.*', function(req, res){
