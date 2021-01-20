@@ -7,6 +7,7 @@ export default class SignUpForm extends Component{
         email:'',
         password:'',
         error:'',
+        confirm:''
     }
 
     handleChange = (evt) => {
@@ -23,7 +24,8 @@ export default class SignUpForm extends Component{
             delete formData.error;
             delete formData.confirm;
             const user = await signUp(formData);
-            console.log(user)
+            this.props.setUser(user);
+            // console.log(user);
         } catch {
             this.setState({error:'signup failed'})
         }
